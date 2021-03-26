@@ -87,11 +87,17 @@ console.log("This is the Webhook Buddy Poster");
 console.log("The default endpoint to add webhooks to is Stripe ACME");
 console.log("Endpoint Id: " + endpointId);
 console.log("-------");
-rl.question("How many webhooks would you like to send? ", (num) => {
-	for (let i = 0; i < +num; i++) {
-		postWebhook(endpointId, payload).then((res) => {
-			console.log("Added webhook number " + i);
-		});
-	}
-	rl.close();
-});
+let promises = [];
+const recursiveQuestion = () => {
+  rl.question("How many webhooks would you like to send? ", (num) => {
+    for (let i = 0; i < +num; i++) {
+      promises.push(postWebhook(endpointId, payload));
+    }
+    Promise.all(promises).then(() => {
+      console.log(`Sent ${num} webhooks.`);
+      recursiveQuestion();
+    });
+  });
+}
+
+recursiveQuestion();
