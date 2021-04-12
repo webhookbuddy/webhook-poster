@@ -73,18 +73,21 @@ const rl = readline.createInterface({
 
 
 function postWebhook(endpoint, data) {
-	return fetch('http://localhost:8000/point/' + endpointId, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(payload)
-	})
+	return fetch(
+		'point.webhookbuddy.com/' +
+			endpointId,
+		{
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(payload),
+		}
+	);
 }
 
 let payload = { donuts };
-let endpointId = "2b09ec19-ebe4-4f53-8c42-0c1185556946";
-
-console.log("This is the Webhook Buddy Poster");
-console.log("The default endpoint to add webhooks to is Stripe ACME");
+let endpointId = "7dcd7b05-d279-4034-bed1-84984483bcf5";
+console.log("Webhook Buddy Poster");
+console.log("Endpoint Name: Stripe");
 console.log("Endpoint Id: " + endpointId);
 console.log("-------");
 let promises = [];
