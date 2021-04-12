@@ -74,8 +74,7 @@ const rl = readline.createInterface({
 
 function postWebhook(endpoint, data) {
 	return fetch(
-		'point.webhookbuddy.com/' +
-			endpointId,
+		'https://point.webhookbuddy.com/' + endpoint,
 		{
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
