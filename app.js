@@ -61,15 +61,18 @@ const rl = readline.createInterface({
 });
 
 function postWebhook(endpoint, data) {
-  return fetch('https://point.webhookbuddy.com/' + endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
+  return fetch(
+    `http://localhost:5001/webhookbuddy-dev/us-central1/point/${endpoint}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    },
+  );
 }
 
 let payload = { donuts };
-let endpointId = '7dcd7b05-d279-4034-bed1-84984483bcf5';
+let endpointId = 'bKA-ZgZz5YdQlSsSVi-Jz';
 console.log('Webhook Buddy Poster');
 console.log('Endpoint Name: Stripe');
 console.log('Endpoint Id: ' + endpointId);
